@@ -1,9 +1,9 @@
 Package: com.matchstic.WhoDis
 Name: WhoDis
-Version: 0.1-1
+Version: 0.1
 Description: 
 Section: System
-Depends: firmware (>= 5.0), mobilesubstrate
+Depends: firmware (>= 9.0), mobilesubstrate, com.rpetrich.rocketbootstrap (>= 1.0.2)
 Conflicts: 
 Replaces: 
 Priority: optional

@@ -9,6 +9,17 @@
 /* Begin PBXBuildFile section */
 		C9338D9D1DA93BF900163D21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338D9C1DA93BF900163D21 /* Foundation.framework */; };
 		C9338DA81DA93BF900163D21 /* WhoDis.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9338DA71DA93BF900163D21 /* WhoDis.mm */; };
+		C9338DB31DA93C5F00163D21 /* libsubstrate.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DB21DA93C5F00163D21 /* libsubstrate.dylib */; };
+		C9338DB51DA94F7F00163D21 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DB41DA94F7F00163D21 /* CoreTelephony.framework */; };
+		C9338DB71DA94FAE00163D21 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DB61DA94FAE00163D21 /* MobileCoreServices.framework */; };
+		C9338DBA1DA9826C00163D21 /* WDCallerIDViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = C9338DB81DA9826C00163D21 /* WDCallerIDViewController.h */; };
+		C9338DBB1DA9826C00163D21 /* WDCallerIDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C9338DB91DA9826C00163D21 /* WDCallerIDViewController.m */; };
+		C9338DBD1DA9889400163D21 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DBC1DA9889400163D21 /* UIKit.framework */; };
+		C9338DBF1DA9889F00163D21 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DBE1DA9889F00163D21 /* CoreGraphics.framework */; };
+		C9338DC11DA99B2700163D21 /* librocketbootstrap.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DC01DA99B2700163D21 /* librocketbootstrap.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
+		C9338DC31DA99B7E00163D21 /* AppSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DC21DA99B7E00163D21 /* AppSupport.framework */; };
+		C93EA2F41DA99FFB009D8CD9 /* WDDataDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = C93EA2F21DA99FFB009D8CD9 /* WDDataDownloader.h */; };
+		C93EA2F51DA99FFB009D8CD9 /* WDDataDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C93EA2F31DA99FFB009D8CD9 /* WDDataDownloader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,9 +29,20 @@
 		C9338DA21DA93BF900163D21 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
 		C9338DA41DA93BF900163D21 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
 		C9338DA51DA93BF900163D21 /* WhoDis-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhoDis-Prefix.pch"; sourceTree = "<group>"; };
-		C9338DA61DA93BF900163D21 /* WhoDis.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = WhoDis.xm; sourceTree = "<group>"; };
+		C9338DA61DA93BF900163D21 /* WhoDis.xm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WhoDis.xm; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		C9338DA71DA93BF900163D21 /* WhoDis.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WhoDis.mm; sourceTree = "<group>"; };
 		C9338DAC1DA93BF900163D21 /* WhoDis.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WhoDis.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/WhoDis.plist; sourceTree = "<group>"; };
+		C9338DB21DA93C5F00163D21 /* libsubstrate.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsubstrate.dylib; path = ../../../../../opt/iOSOpenDev/lib/libsubstrate.dylib; sourceTree = "<group>"; };
+		C9338DB41DA94F7F00163D21 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		C9338DB61DA94FAE00163D21 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		C9338DB81DA9826C00163D21 /* WDCallerIDViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDCallerIDViewController.h; sourceTree = "<group>"; };
+		C9338DB91DA9826C00163D21 /* WDCallerIDViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDCallerIDViewController.m; sourceTree = "<group>"; };
+		C9338DBC1DA9889400163D21 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C9338DBE1DA9889F00163D21 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C9338DC01DA99B2700163D21 /* librocketbootstrap.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = librocketbootstrap.dylib; path = ../../../../../opt/iOSOpenDev/lib/librocketbootstrap.dylib; sourceTree = "<group>"; };
+		C9338DC21DA99B7E00163D21 /* AppSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppSupport.framework; path = System/Library/PrivateFrameworks/AppSupport.framework; sourceTree = SDKROOT; };
+		C93EA2F21DA99FFB009D8CD9 /* WDDataDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDDataDownloader.h; sourceTree = "<group>"; };
+		C93EA2F31DA99FFB009D8CD9 /* WDDataDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDDataDownloader.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,6 +50,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C9338DC11DA99B2700163D21 /* librocketbootstrap.dylib in Frameworks */,
+				C9338DC31DA99B7E00163D21 /* AppSupport.framework in Frameworks */,
+				C9338DBF1DA9889F00163D21 /* CoreGraphics.framework in Frameworks */,
+				C9338DBD1DA9889400163D21 /* UIKit.framework in Frameworks */,
+				C9338DB71DA94FAE00163D21 /* MobileCoreServices.framework in Frameworks */,
+				C9338DB51DA94F7F00163D21 /* CoreTelephony.framework in Frameworks */,
+				C9338DB31DA93C5F00163D21 /* libsubstrate.dylib in Frameworks */,
 				C9338D9D1DA93BF900163D21 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -55,6 +84,13 @@
 		C9338D9B1DA93BF900163D21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C9338DC21DA99B7E00163D21 /* AppSupport.framework */,
+				C9338DC01DA99B2700163D21 /* librocketbootstrap.dylib */,
+				C9338DBE1DA9889F00163D21 /* CoreGraphics.framework */,
+				C9338DBC1DA9889400163D21 /* UIKit.framework */,
+				C9338DB61DA94FAE00163D21 /* MobileCoreServices.framework */,
+				C9338DB41DA94F7F00163D21 /* CoreTelephony.framework */,
+				C9338DB21DA93C5F00163D21 /* libsubstrate.dylib */,
 				C9338D9C1DA93BF900163D21 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -63,6 +99,10 @@
 		C9338D9E1DA93BF900163D21 /* WhoDis */ = {
 			isa = PBXGroup;
 			children = (
+				C9338DB81DA9826C00163D21 /* WDCallerIDViewController.h */,
+				C9338DB91DA9826C00163D21 /* WDCallerIDViewController.m */,
+				C93EA2F21DA99FFB009D8CD9 /* WDDataDownloader.h */,
+				C93EA2F31DA99FFB009D8CD9 /* WDDataDownloader.m */,
 				C9338DA61DA93BF900163D21 /* WhoDis.xm */,
 				C9338DA71DA93BF900163D21 /* WhoDis.mm */,
 				C9338D9F1DA93BF900163D21 /* Package */,
@@ -129,6 +169,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C93EA2F41DA99FFB009D8CD9 /* WDDataDownloader.h in Headers */,
+				C9338DBA1DA9826C00163D21 /* WDCallerIDViewController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +261,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C9338DA81DA93BF900163D21 /* WhoDis.mm in Sources */,
+				C93EA2F51DA99FFB009D8CD9 /* WDDataDownloader.m in Sources */,
+				C9338DBB1DA9826C00163D21 /* WDCallerIDViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,17 +329,25 @@
 				CODE_SIGN_IDENTITY = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhoDis/WhoDis-Prefix.pch";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/iOSOpenDev/lib,
+				);
 				OTHER_LDFLAGS = "-Wl,-segalign,4000";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
 				iOSOpenDevDevice = "";
 				iOSOpenDevInstallOnAnyBuild = NO;
-				iOSOpenDevInstallOnProfiling = YES;
-				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevInstallOnProfiling = NO;
+				iOSOpenDevRespringOnInstall = NO;
 				iOSOpenDevUsePackageVersionPList = YES;
 			};
 			name = Debug;
@@ -307,17 +359,25 @@
 				CODE_SIGN_IDENTITY = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "WhoDis/WhoDis-Prefix.pch";
 				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/opt/iOSOpenDev/lib,
+				);
 				OTHER_LDFLAGS = "-Wl,-segalign,4000";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				iOSOpenDevBuildPackageOnAnyBuild = NO;
 				iOSOpenDevCopyOnBuild = NO;
 				iOSOpenDevDevice = "";
 				iOSOpenDevInstallOnAnyBuild = NO;
-				iOSOpenDevInstallOnProfiling = YES;
-				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevInstallOnProfiling = NO;
+				iOSOpenDevRespringOnInstall = NO;
 				iOSOpenDevUsePackageVersionPList = YES;
 			};
 			name = Release;
@@ -341,6 +401,7 @@
 				C9338DB11DA93BF900163D21 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
