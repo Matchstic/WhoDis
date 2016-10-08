@@ -1,0 +1,348 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C9338D9D1DA93BF900163D21 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338D9C1DA93BF900163D21 /* Foundation.framework */; };
+		C9338DA81DA93BF900163D21 /* WhoDis.mm in Sources */ = {isa = PBXBuildFile; fileRef = C9338DA71DA93BF900163D21 /* WhoDis.mm */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C9338D991DA93BF900163D21 /* WhoDis.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = WhoDis.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
+		C9338D9C1DA93BF900163D21 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C9338DA11DA93BF900163D21 /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		C9338DA21DA93BF900163D21 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		C9338DA41DA93BF900163D21 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		C9338DA51DA93BF900163D21 /* WhoDis-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhoDis-Prefix.pch"; sourceTree = "<group>"; };
+		C9338DA61DA93BF900163D21 /* WhoDis.xm */ = {isa = PBXFileReference; lastKnownFileType = text; path = WhoDis.xm; sourceTree = "<group>"; };
+		C9338DA71DA93BF900163D21 /* WhoDis.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = WhoDis.mm; sourceTree = "<group>"; };
+		C9338DAC1DA93BF900163D21 /* WhoDis.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WhoDis.plist; path = Package/Library/MobileSubstrate/DynamicLibraries/WhoDis.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C9338D951DA93BF900163D21 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9338D9D1DA93BF900163D21 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C9338D8E1DA93BF900163D21 = {
+			isa = PBXGroup;
+			children = (
+				C9338D9E1DA93BF900163D21 /* WhoDis */,
+				C9338D9B1DA93BF900163D21 /* Frameworks */,
+				C9338D9A1DA93BF900163D21 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C9338D9A1DA93BF900163D21 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C9338D991DA93BF900163D21 /* WhoDis.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C9338D9B1DA93BF900163D21 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C9338D9C1DA93BF900163D21 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C9338D9E1DA93BF900163D21 /* WhoDis */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DA61DA93BF900163D21 /* WhoDis.xm */,
+				C9338DA71DA93BF900163D21 /* WhoDis.mm */,
+				C9338D9F1DA93BF900163D21 /* Package */,
+				C9338DA31DA93BF900163D21 /* Supporting Files */,
+			);
+			path = WhoDis;
+			sourceTree = "<group>";
+		};
+		C9338D9F1DA93BF900163D21 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DA01DA93BF900163D21 /* DEBIAN */,
+				C9338DA91DA93BF900163D21 /* Library */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		C9338DA01DA93BF900163D21 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DA11DA93BF900163D21 /* control.txt */,
+				C9338DA21DA93BF900163D21 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		C9338DA31DA93BF900163D21 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DA41DA93BF900163D21 /* PackageVersion.plist */,
+				C9338DA51DA93BF900163D21 /* WhoDis-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C9338DA91DA93BF900163D21 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DAA1DA93BF900163D21 /* MobileSubstrate */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		C9338DAA1DA93BF900163D21 /* MobileSubstrate */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DAB1DA93BF900163D21 /* DynamicLibraries */,
+			);
+			name = MobileSubstrate;
+			sourceTree = "<group>";
+		};
+		C9338DAB1DA93BF900163D21 /* DynamicLibraries */ = {
+			isa = PBXGroup;
+			children = (
+				C9338DAC1DA93BF900163D21 /* WhoDis.plist */,
+			);
+			name = DynamicLibraries;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		C9338D961DA93BF900163D21 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		C9338D981DA93BF900163D21 /* WhoDis */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C9338DAF1DA93BF900163D21 /* Build configuration list for PBXNativeTarget "WhoDis" */;
+			buildPhases = (
+				C9338D931DA93BF900163D21 /* ShellScript */,
+				C9338D941DA93BF900163D21 /* Sources */,
+				C9338D951DA93BF900163D21 /* Frameworks */,
+				C9338D961DA93BF900163D21 /* Headers */,
+				C9338D971DA93BF900163D21 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhoDis;
+			productName = WhoDis;
+			productReference = C9338D991DA93BF900163D21 /* WhoDis.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C9338D8F1DA93BF900163D21 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				TargetAttributes = {
+					C9338D981DA93BF900163D21 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = C9338D921DA93BF900163D21 /* Build configuration list for PBXProject "WhoDis" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C9338D8E1DA93BF900163D21;
+			productRefGroup = C9338D9A1DA93BF900163D21 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C9338D981DA93BF900163D21 /* WhoDis */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C9338D931DA93BF900163D21 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp-logos";
+		};
+		C9338D971DA93BF900163D21 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C9338D941DA93BF900163D21 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C9338DA81DA93BF900163D21 /* WhoDis.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C9338DAD1DA93BF900163D21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = NO;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Debug;
+		};
+		C9338DAE1DA93BF900163D21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+			};
+			name = Release;
+		};
+		C9338DB01DA93BF900163D21 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WhoDis/WhoDis-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				OTHER_LDFLAGS = "-Wl,-segalign,4000";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		C9338DB11DA93BF900163D21 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WhoDis/WhoDis-Prefix.pch";
+				INSTALL_PATH = /Library/MobileSubstrate/DynamicLibraries;
+				OTHER_LDFLAGS = "-Wl,-segalign,4000";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C9338D921DA93BF900163D21 /* Build configuration list for PBXProject "WhoDis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9338DAD1DA93BF900163D21 /* Debug */,
+				C9338DAE1DA93BF900163D21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C9338DAF1DA93BF900163D21 /* Build configuration list for PBXNativeTarget "WhoDis" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9338DB01DA93BF900163D21 /* Debug */,
+				C9338DB11DA93BF900163D21 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C9338D8F1DA93BF900163D21 /* Project object */;
+}
