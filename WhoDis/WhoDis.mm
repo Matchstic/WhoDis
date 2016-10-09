@@ -1,5 +1,6 @@
 #line 1 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 #import "WDCallerIDViewController.h"
 #import "WDDataDownloader.h"
 
@@ -59,6 +60,11 @@
 -(void)sendMessageAndReceiveReplyName:(NSString*)name userInfo:(NSDictionary*)info toTarget:(id)target selector:(SEL)selector context:(void*)context;
 @end
 
+@interface SBUserAgent : NSObject
++ (id)sharedUserAgent;
+- (_Bool)applicationInstalledForDisplayID:(id)arg1;
+@end
+
 
 
 
@@ -85,10 +91,10 @@ static NSString *inCallCurrentDownloadNumber;
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class PHAudioCallViewController; @class SpringBoard; @class InCallServiceApplication; 
+@class SpringBoard; @class PHAudioCallViewController; @class InCallServiceApplication; 
 
 
-#line 85 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
+#line 91 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
 static void (*_logos_orig$InCallService$PHAudioCallViewController$setCurrentState$animated$)(PHAudioCallViewController*, SEL, unsigned short, _Bool); static void _logos_method$InCallService$PHAudioCallViewController$setCurrentState$animated$(PHAudioCallViewController*, SEL, unsigned short, _Bool); static void (*_logos_orig$InCallService$PHAudioCallViewController$viewDidLayoutSubviews)(PHAudioCallViewController*, SEL); static void _logos_method$InCallService$PHAudioCallViewController$viewDidLayoutSubviews(PHAudioCallViewController*, SEL); static id (*_logos_orig$InCallService$InCallServiceApplication$init)(InCallServiceApplication*, SEL); static id _logos_method$InCallService$InCallServiceApplication$init(InCallServiceApplication*, SEL); static NSDictionary * _logos_method$InCallService$InCallServiceApplication$_whodis_handleMessageNamed$withUserInfo$(InCallServiceApplication*, SEL, NSString *, NSDictionary *); 
 
 
@@ -435,7 +441,11 @@ static void _logos_method$SpringBoard$SpringBoard$applicationDidFinishLaunching$
     [sbCenter registerForMessageName:@"cancelDownload" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     
     
-    
+    BOOL installed = [[objc_getClass("SBUserAgent") sharedUserAgent] applicationInstalledForDisplayID:@"com.truesoftware.TrueCallerOther"];
+    if (!installed) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Who Dis?" message:@"Install and setup the Truecaller app from the App Store to use this tweak." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+    }
 }
 
 
@@ -490,7 +500,7 @@ static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessag
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_9538a8e0() {
+static __attribute__((constructor)) void _logosLocalCtor_0a0ddd70() {
     {}
     
     

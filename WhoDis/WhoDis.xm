@@ -1,4 +1,5 @@
 #import <UIKit/UIKit.h>
+#import <objc/runtime.h>
 #import "WDCallerIDViewController.h"
 #import "WDDataDownloader.h"
 
@@ -56,6 +57,11 @@
 -(void)stopServer;
 -(void)registerForMessageName:(NSString*)messageName target:(id)target selector:(SEL)selector;
 -(void)sendMessageAndReceiveReplyName:(NSString*)name userInfo:(NSDictionary*)info toTarget:(id)target selector:(SEL)selector context:(void*)context;
+@end
+
+@interface SBUserAgent : NSObject
++ (id)sharedUserAgent;
+- (_Bool)applicationInstalledForDisplayID:(id)arg1;
 @end
 
 ///////////////////////////////////////////////////////////////////////////
@@ -428,7 +434,11 @@ void analyseResultingData(NSData *dataIn) {
     [sbCenter registerForMessageName:@"cancelDownload" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     
     // XXX: Since I fully expect users to not read, display a popup on appFinishLaunch if they don't have Truecaller installed.
-    
+    BOOL installed = [[objc_getClass("SBUserAgent") sharedUserAgent] applicationInstalledForDisplayID:@"com.truesoftware.TrueCallerOther"];
+    if (!installed) {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Who Dis?" message:@"Install and setup the Truecaller app from the App Store to use this tweak." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [av show];
+    }
 }
 
 %new
