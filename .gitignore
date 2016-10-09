@@ -4,3 +4,4 @@ Packages/
 *.dylib
 changelog.txt
 *.deb
+Depiction/
