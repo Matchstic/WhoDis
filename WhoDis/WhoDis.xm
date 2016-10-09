@@ -37,7 +37,6 @@
 @end
 
 @interface PHAudioCallViewController : UIViewController
-//@property(retain, nonatomic) TUCall *callForBackgroundImage;
 @property(retain) PHCallParticipantsViewController *callParticipantsViewController;
 @end
 
@@ -63,7 +62,7 @@
 // Function definitions
 
 extern "C" {
-void rocketbootstrap_distributedmessagingcenter_apply(CPDistributedMessagingCenter *messaging_center);
+    void rocketbootstrap_distributedmessagingcenter_apply(CPDistributedMessagingCenter *messaging_center);
 }
 
 NSDictionary *constructParametersForNumber(NSString *number);
@@ -85,17 +84,18 @@ static NSString *inCallCurrentDownloadNumber;
 
 %group InCallService
 
+// Construct parameters to send to the Truecaller API
 NSDictionary *constructParametersForNumber(NSString *number) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
-    // q is number coming in - need to strip it as needed.
+    // q is phone number coming in - need to strip it as needed.
     number = [number stringByReplacingOccurrencesOfString:@"-" withString:@""];
     number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
     number = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
     number = [number stringByReplacingOccurrencesOfString:@")" withString:@""];
     number = [number stringByReplacingOccurrencesOfString:@"+" withString:@"00"];
     
-    // myNumber
+    // myNumber - gotta get SB to pull this due to an entitlement.
     NSDictionary *reply = [inCallCenter sendMessageAndReceiveReplyName:@"getThing" userInfo:nil];
     NSString *myNumber = [reply objectForKey:@"myNumber"];
     if (!myNumber)
@@ -131,6 +131,7 @@ NSDictionary *constructParametersForNumber(NSString *number) {
     return dict;
 }
 
+// Create full URL string.
 NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
     // https://search5.truecaller.com/v2/search?client_id=1&clientId=1&countryCode=gb&locAddr=&myNumber=d4619f1ec7ab4093b40fad78b5d170aa&pageId=&q=08436848488&registerId=357839475&type=4
     
@@ -143,16 +144,16 @@ NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
     return string;
 }
 
+// One function to call when needed, rather than 4.
 void getTruecallerInformatonForNumber(NSString *number) {
     // XXX: We only want to initiate a download if the number is different to what we had previously.
     
     if (![inCallCurrentDownloadNumber isEqualToString:number]) {
-        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
         NSDictionary *params = constructParametersForNumber(number);
         NSString *jsonURL = formatDictionaryIntoURLString(params);
     
         // XXX: We want SpringBoard to do the downloading for us too.
-        // This is because InCallService seems to not like downloading any data whatsoever.
+        // This is to ensure that InCallService doesn't show up in the Battery usage tab
         NSMutableDictionary *info = [NSMutableDictionary dictionary];
         [info setObject:jsonURL forKey:@"url"];
         [inCallCenter sendMessageName:@"downloadFromURL" userInfo:info];
@@ -161,6 +162,7 @@ void getTruecallerInformatonForNumber(NSString *number) {
     }
 }
 
+// And finally, parse the JSON data downloaded from SpringBoard.
 void analyseResultingData(NSData *dataIn) {
     inCallCurrentDownloadNumber = @"";
     
@@ -201,7 +203,8 @@ void analyseResultingData(NSData *dataIn) {
     NSArray *data = [jsonDict objectForKey:@"data"];
     
     if (!data) {
-        // Unauthorised.
+        // Unauthorised - requestId or myNumber are invalid.
+        // Might want to check that Truecaller is installed?
         NSMutableDictionary *finalData = [NSMutableDictionary dictionary];
         [finalData setObject:@"Unauthorised connection" forKey:@"name"];
         [finalData setObject:@"NONE" forKey:@"spamType"];
@@ -299,18 +302,28 @@ void analyseResultingData(NSData *dataIn) {
 
 - (void)setCurrentState:(unsigned short)arg1 animated:(_Bool)arg2 {
     if (arg1 != 0) {
-        // Hide the view
+        // Hide the view since no longer incoming state.
         
         if (callerIDController.view.alpha != 0.0) {
             callerIDController.view.alpha = 0.0;
             
+            // Cancel the download if there's one still going, as we don't need it now.
             [inCallCenter sendMessageName:@"cancelDownload" userInfo:nil];
         }
     } else if (arg1 == 0) {
         // Show view if needed.
         
+        // TODO: Should we also display for outgoing calls too? It's not like it's hard.
+        
         @try {
+            // Sometimes, this function will do a stupid and crash InCallService. This will make a lot of people very angry
+            // and is widely regarded as a bad move.
             NSString *numberOrName = [self.callParticipantsViewController nameForParticipantAtIndex:0 inParticipantsView:self.callParticipantsViewController.participantsView];
+            
+            // Check if the number shown is a phone number. This should in theory nicely handle when "No caller ID" is
+            // shown, or when it's a contact - don't want to run on those two anyway.
+            //
+            // This might also be able to handle FaceTime video or Audio when the other party uses a phone number.
         
             NSError *error = NULL;
             NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
@@ -351,6 +364,9 @@ void analyseResultingData(NSData *dataIn) {
 -(void)viewDidLayoutSubviews {
     %orig;
     
+    // We want to plonk our UI down where the "mobile", or "home" string is usually placed.
+    // Note that sometimes iOS can judge the geolocation of an unknown call, so we don't to place our text over that.
+    
     PHCallParticipantsView *participants = self.callParticipantsViewController.participantsView;
     UILabel *statusLabel = participants.singleCallLabelView.statusLabel;
     
@@ -367,6 +383,8 @@ void analyseResultingData(NSData *dataIn) {
 -(id)init {
     id orig = %orig;
     
+    // XXX: We reuse the sbCenter var here since it's nil anyway in this process, and listen for data coming
+    // back from SpringBoard.
     sbCenter = [CPDistributedMessagingCenter centerNamed:@"com.matchstic.whodis.incall"];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/usr/lib/librocketbootstrap.dylib"])
@@ -380,7 +398,6 @@ void analyseResultingData(NSData *dataIn) {
 
 %new
 -(NSDictionary *)_whodis_handleMessageNamed:(NSString *)name withUserInfo:(NSDictionary *)userinfo {
-    // Process userinfo (simple dictionary) and return a dictionary (or nil)
     if ([name isEqualToString:@"finishedDownload"]) {
         NSData *data = [userinfo objectForKey:@"data"];
         analyseResultingData(data);
@@ -410,14 +427,15 @@ void analyseResultingData(NSData *dataIn) {
     [sbCenter registerForMessageName:@"downloadFromURL" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     [sbCenter registerForMessageName:@"cancelDownload" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     
-    // XXX: Since I fully expect users to be stupid, display a popup on appFinishLaunch if they don't have Truecaller installed.
+    // XXX: Since I fully expect users to not read, display a popup on appFinishLaunch if they don't have Truecaller installed.
     
 }
 
 %new
 -(NSDictionary *)_whodis_handleMessageNamed:(NSString *)name withUserInfo:(NSDictionary *)userinfo {
-    // Process userinfo (simple dictionary) and return a dictionary (or nil)
     if ([name isEqualToString:@"getThing"]) {
+        // TODO: I really should cache myNumber, saves having to query against lsd every time a phone call comes in.
+        
         LSApplicationProxy *proxy = [LSApplicationProxy applicationProxyForIdentifier:@"com.truesoftware.TrueCallerOther"];
         NSUUID *uuid = [proxy deviceIdentifierForVendor];
         NSString *myNumber = [uuid UUIDString];
@@ -468,7 +486,7 @@ void analyseResultingData(NSData *dataIn) {
 %ctor {
     %init;
     
-    // XXX: We need to go multi-process so that we can leverage an entitlement from SB.
+    // XXX: We need to go multi-process so that we can leverage an entitlement from SB to talk to lsd.
     
     BOOL sb = [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.springboard"];
     
@@ -477,7 +495,7 @@ void analyseResultingData(NSData *dataIn) {
         
         inCallCenter = [CPDistributedMessagingCenter centerNamed:@"com.matchstic.whodis.incall"];
         
-        // Not needed on iOS 6
+        // Sanity check, just in case the user is a little dim and decided to disable rocketbootstrap somehow.
         if ([[NSFileManager defaultManager] fileExistsAtPath:@"/usr/lib/librocketbootstrap.dylib"])
             rocketbootstrap_distributedmessagingcenter_apply(inCallCenter);
 
@@ -486,7 +504,6 @@ void analyseResultingData(NSData *dataIn) {
         
         inCallCenter = [CPDistributedMessagingCenter centerNamed:@"com.matchstic.whodis"];
         
-        // Not needed on iOS 6
         if ([[NSFileManager defaultManager] fileExistsAtPath:@"/usr/lib/librocketbootstrap.dylib"])
             rocketbootstrap_distributedmessagingcenter_apply(inCallCenter);
     }

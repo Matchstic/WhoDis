@@ -1,0 +1,6 @@
+Working/
+LatestBuild/
+Packages/
+*.dylib
+changelog.txt
+*.deb
