@@ -22,8 +22,12 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     // Create url connection and fire request
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    [conn start];
+    _conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    [_conn start];
+}
+
+-(void)cancelDownloadIfNecessary {
+    [_conn cancel];
 }
 
 #pragma mark NSURLConnection Delegate Methods

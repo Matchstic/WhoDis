@@ -78,6 +78,7 @@ static CPDistributedMessagingCenter *sbCenter;
 static CPDistributedMessagingCenter *inCallCenter;
 static WDCallerIDViewController *callerIDController;
 static WDDataDownloader *dataDownloader;
+static NSString *inCallCurrentDownloadNumber;
 
 ///////////////////////////////////////////////////////////////////////////
 // Actual code
@@ -143,18 +144,26 @@ NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
 }
 
 void getTruecallerInformatonForNumber(NSString *number) {
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
-    NSDictionary *params = constructParametersForNumber(number);
-    NSString *jsonURL = formatDictionaryIntoURLString(params);
+    // XXX: We only want to initiate a download if the number is different to what we had previously.
     
-    // XXX: We want SpringBoard to do the downloading for us too.
-    // This is because InCallService seems to not like downloading any data whatsoever.
-    NSMutableDictionary *info = [NSMutableDictionary dictionary];
-    [info setObject:jsonURL forKey:@"url"];
-    [inCallCenter sendMessageName:@"downloadFromURL" userInfo:info];
+    if (![inCallCurrentDownloadNumber isEqualToString:number]) {
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+        NSDictionary *params = constructParametersForNumber(number);
+        NSString *jsonURL = formatDictionaryIntoURLString(params);
+    
+        // XXX: We want SpringBoard to do the downloading for us too.
+        // This is because InCallService seems to not like downloading any data whatsoever.
+        NSMutableDictionary *info = [NSMutableDictionary dictionary];
+        [info setObject:jsonURL forKey:@"url"];
+        [inCallCenter sendMessageName:@"downloadFromURL" userInfo:info];
+        
+        inCallCurrentDownloadNumber = number;
+    }
 }
 
 void analyseResultingData(NSData *dataIn) {
+    inCallCurrentDownloadNumber = @"";
+    
     if (!dataIn || dataIn.length == 0) {
         // Handle no data accessible
         NSMutableDictionary *finalData = [NSMutableDictionary dictionary];
@@ -294,6 +303,8 @@ void analyseResultingData(NSData *dataIn) {
         
         if (callerIDController.view.alpha != 0.0) {
             callerIDController.view.alpha = 0.0;
+            
+            [inCallCenter sendMessageName:@"cancelDownload" userInfo:nil];
         }
     } else if (arg1 == 0) {
         // Show view if needed.
@@ -397,6 +408,7 @@ void analyseResultingData(NSData *dataIn) {
     [sbCenter runServerOnCurrentThread];
     [sbCenter registerForMessageName:@"getThing" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     [sbCenter registerForMessageName:@"downloadFromURL" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
+    [sbCenter registerForMessageName:@"cancelDownload" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     
     // XXX: Since I fully expect users to be stupid, display a popup on appFinishLaunch if they don't have Truecaller installed.
     
@@ -420,16 +432,15 @@ void analyseResultingData(NSData *dataIn) {
     
         return output;
     } else if ([name isEqualToString:@"downloadFromURL"]) {
-        NSLog(@"ABOUT TO DOWNLOAD IN SB");
-        
         NSString *url = [userinfo objectForKey:@"url"];
         
         if (!dataDownloader) {
             dataDownloader = [[WDDataDownloader alloc] init];
+        } else {
+            [dataDownloader cancelDownloadIfNecessary];
         }
         
         [dataDownloader downloadFromURL:url withCallback:^(NSData *data) {
-            NSLog(@"DOWNLOADED! %lu", (unsigned long)data.length);
             // Communicate *back* to InCallService with NSData in dict.
             if (!data) {
                 data = [NSData new];
@@ -441,6 +452,9 @@ void analyseResultingData(NSData *dataIn) {
             [inCallCenter sendMessageName:@"finishedDownload" userInfo:dict];
         }];
         
+        return nil;
+    } else if ([name isEqualToString:@"cancelDownload"]) {
+        [dataDownloader cancelDownloadIfNecessary];
         return nil;
     } else {
         return nil;
