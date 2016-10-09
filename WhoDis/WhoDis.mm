@@ -85,7 +85,7 @@ static WDDataDownloader *dataDownloader;
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class SpringBoard; @class InCallServiceApplication; @class PHAudioCallViewController; 
+@class InCallServiceApplication; @class SpringBoard; @class PHAudioCallViewController; 
 
 
 #line 85 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
@@ -153,8 +153,6 @@ void getTruecallerInformatonForNumber(NSString *number) {
     
     NSDictionary *params = constructParametersForNumber(number);
     NSString *jsonURL = formatDictionaryIntoURLString(params);
-    
-    NSLog(@"***** GETTING TRUECALLER DETAILS WITH URL: %@", jsonURL);
     
     
     
@@ -307,35 +305,39 @@ static void _logos_method$InCallService$PHAudioCallViewController$setCurrentStat
     } else if (arg1 == 0) {
         
         
-        NSString *numberOrName = [self.callParticipantsViewController nameForParticipantAtIndex:0 inParticipantsView:self.callParticipantsViewController.participantsView];
+        @try {
+            NSString *numberOrName = [self.callParticipantsViewController nameForParticipantAtIndex:0 inParticipantsView:self.callParticipantsViewController.participantsView];
         
-        NSError *error = NULL;
-        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
+            NSError *error = NULL;
+            NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
         
-        NSRange inputRange = NSMakeRange(0, [numberOrName length]);
-        NSArray *matches = [detector matchesInString:numberOrName options:0 range:inputRange];
+            NSRange inputRange = NSMakeRange(0, [numberOrName length]);
+            NSArray *matches = [detector matchesInString:numberOrName options:0 range:inputRange];
         
-        BOOL isPhoneNumber = NO;
+            BOOL isPhoneNumber = NO;
         
-        if ([matches count] > 0) {
-            isPhoneNumber = YES;
-        }
-        
-        if (isPhoneNumber) {
-            getTruecallerInformatonForNumber(numberOrName);
-            
-            
-            if (!callerIDController) {
-                callerIDController = [[WDCallerIDViewController alloc] init];
+            if ([matches count] > 0) {
+                isPhoneNumber = YES;
             }
+        
+            if (isPhoneNumber) {
+                getTruecallerInformatonForNumber(numberOrName);
             
-            [self.view addSubview:callerIDController.view];
+                
+                if (!callerIDController) {
+                    callerIDController = [[WDCallerIDViewController alloc] init];
+                }
             
-            [callerIDController didBeginRequestingData];
+                [self.view addSubview:callerIDController.view];
             
-            if (callerIDController.view.alpha != 1.0) {
-                callerIDController.view.alpha = 1.0;
+                [callerIDController didBeginRequestingData];
+            
+                if (callerIDController.view.alpha != 1.0) {
+                    callerIDController.view.alpha = 1.0;
+                }
             }
+        } @catch (NSException *e) {
+            NSLog(@"[WhoDis] :: Something has gone very wrong...!\n%@", e);
         }
     }
     
@@ -456,7 +458,7 @@ static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessag
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_ae9fcaaa() {
+static __attribute__((constructor)) void _logosLocalCtor_25b1024c() {
     {}
     
     

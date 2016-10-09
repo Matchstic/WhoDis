@@ -298,35 +298,39 @@ void analyseResultingData(NSData *dataIn) {
     } else if (arg1 == 0) {
         // Show view if needed.
         
-        NSString *numberOrName = [self.callParticipantsViewController nameForParticipantAtIndex:0 inParticipantsView:self.callParticipantsViewController.participantsView];
+        @try {
+            NSString *numberOrName = [self.callParticipantsViewController nameForParticipantAtIndex:0 inParticipantsView:self.callParticipantsViewController.participantsView];
         
-        NSError *error = NULL;
-        NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
+            NSError *error = NULL;
+            NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
         
-        NSRange inputRange = NSMakeRange(0, [numberOrName length]);
-        NSArray *matches = [detector matchesInString:numberOrName options:0 range:inputRange];
+            NSRange inputRange = NSMakeRange(0, [numberOrName length]);
+            NSArray *matches = [detector matchesInString:numberOrName options:0 range:inputRange];
         
-        BOOL isPhoneNumber = NO;
+            BOOL isPhoneNumber = NO;
         
-        if ([matches count] > 0) {
-            isPhoneNumber = YES;
-        }
-        
-        if (isPhoneNumber) {
-            getTruecallerInformatonForNumber(numberOrName);
-            
-            // Make caller ID view visible pls.
-            if (!callerIDController) {
-                callerIDController = [[WDCallerIDViewController alloc] init];
+            if ([matches count] > 0) {
+                isPhoneNumber = YES;
             }
+        
+            if (isPhoneNumber) {
+                getTruecallerInformatonForNumber(numberOrName);
             
-            [self.view addSubview:callerIDController.view];
+                // Make caller ID view visible pls.
+                if (!callerIDController) {
+                    callerIDController = [[WDCallerIDViewController alloc] init];
+                }
             
-            [callerIDController didBeginRequestingData];
+                [self.view addSubview:callerIDController.view];
             
-            if (callerIDController.view.alpha != 1.0) {
-                callerIDController.view.alpha = 1.0;
+                [callerIDController didBeginRequestingData];
+            
+                if (callerIDController.view.alpha != 1.0) {
+                    callerIDController.view.alpha = 1.0;
+                }
             }
+        } @catch (NSException *e) {
+            NSLog(@"[WhoDis] :: Something has gone very wrong...!\n%@", e);
         }
     }
     
