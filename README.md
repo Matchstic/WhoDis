@@ -1,4 +1,4 @@
-# WhoDis
+# Who Dis? (new fone)
 This tweak provides caller ID and checks to unknown numbers using the Truecaller API. 
 
 To use this, the Truecaller app *must* be installed and setup on the device.
