@@ -84,7 +84,7 @@
         spamText = @"Potential spam";
     }
     
-    if ([nameText isEqualToString:@""]) {
+    if ([nameText isEqualToString:@""] || !nameText) {
         self.name.text = spamText;
     } else {
         self.name.text = nameText;

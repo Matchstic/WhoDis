@@ -38,7 +38,6 @@
 @end
 
 @interface PHAudioCallViewController : UIViewController
-
 @property(retain) PHCallParticipantsViewController *callParticipantsViewController;
 @end
 
@@ -64,7 +63,7 @@
 
 
 extern "C" {
-void rocketbootstrap_distributedmessagingcenter_apply(CPDistributedMessagingCenter *messaging_center);
+    void rocketbootstrap_distributedmessagingcenter_apply(CPDistributedMessagingCenter *messaging_center);
 }
 
 NSDictionary *constructParametersForNumber(NSString *number);
@@ -79,17 +78,19 @@ static CPDistributedMessagingCenter *sbCenter;
 static CPDistributedMessagingCenter *inCallCenter;
 static WDCallerIDViewController *callerIDController;
 static WDDataDownloader *dataDownloader;
+static NSString *inCallCurrentDownloadNumber;
 
 
 
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class InCallServiceApplication; @class SpringBoard; @class PHAudioCallViewController; 
+@class PHAudioCallViewController; @class SpringBoard; @class InCallServiceApplication; 
 
 
 #line 85 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
 static void (*_logos_orig$InCallService$PHAudioCallViewController$setCurrentState$animated$)(PHAudioCallViewController*, SEL, unsigned short, _Bool); static void _logos_method$InCallService$PHAudioCallViewController$setCurrentState$animated$(PHAudioCallViewController*, SEL, unsigned short, _Bool); static void (*_logos_orig$InCallService$PHAudioCallViewController$viewDidLayoutSubviews)(PHAudioCallViewController*, SEL); static void _logos_method$InCallService$PHAudioCallViewController$viewDidLayoutSubviews(PHAudioCallViewController*, SEL); static id (*_logos_orig$InCallService$InCallServiceApplication$init)(InCallServiceApplication*, SEL); static id _logos_method$InCallService$InCallServiceApplication$init(InCallServiceApplication*, SEL); static NSDictionary * _logos_method$InCallService$InCallServiceApplication$_whodis_handleMessageNamed$withUserInfo$(InCallServiceApplication*, SEL, NSString *, NSDictionary *); 
+
 
 NSDictionary *constructParametersForNumber(NSString *number) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
@@ -137,6 +138,7 @@ NSDictionary *constructParametersForNumber(NSString *number) {
     return dict;
 }
 
+
 NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
     
     
@@ -149,19 +151,28 @@ NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
     return string;
 }
 
+
 void getTruecallerInformatonForNumber(NSString *number) {
     
-    NSDictionary *params = constructParametersForNumber(number);
-    NSString *jsonURL = formatDictionaryIntoURLString(params);
     
+    if (![inCallCurrentDownloadNumber isEqualToString:number]) {
+        NSDictionary *params = constructParametersForNumber(number);
+        NSString *jsonURL = formatDictionaryIntoURLString(params);
     
-    
-    NSMutableDictionary *info = [NSMutableDictionary dictionary];
-    [info setObject:jsonURL forKey:@"url"];
-    [inCallCenter sendMessageName:@"downloadFromURL" userInfo:info];
+        
+        
+        NSMutableDictionary *info = [NSMutableDictionary dictionary];
+        [info setObject:jsonURL forKey:@"url"];
+        [inCallCenter sendMessageName:@"downloadFromURL" userInfo:info];
+        
+        inCallCurrentDownloadNumber = number;
+    }
 }
 
+
 void analyseResultingData(NSData *dataIn) {
+    inCallCurrentDownloadNumber = @"";
+    
     if (!dataIn || dataIn.length == 0) {
         
         NSMutableDictionary *finalData = [NSMutableDictionary dictionary];
@@ -199,6 +210,7 @@ void analyseResultingData(NSData *dataIn) {
     NSArray *data = [jsonDict objectForKey:@"data"];
     
     if (!data) {
+        
         
         NSMutableDictionary *finalData = [NSMutableDictionary dictionary];
         [finalData setObject:@"Unauthorised connection" forKey:@"name"];
@@ -301,12 +313,24 @@ static void _logos_method$InCallService$PHAudioCallViewController$setCurrentStat
         
         if (callerIDController.view.alpha != 0.0) {
             callerIDController.view.alpha = 0.0;
+            
+            
+            [inCallCenter sendMessageName:@"cancelDownload" userInfo:nil];
         }
     } else if (arg1 == 0) {
         
         
+        
+        
         @try {
+            
+            
             NSString *numberOrName = [self.callParticipantsViewController nameForParticipantAtIndex:0 inParticipantsView:self.callParticipantsViewController.participantsView];
+            
+            
+            
+            
+            
         
             NSError *error = NULL;
             NSDataDetector *detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypePhoneNumber error:&error];
@@ -347,6 +371,9 @@ static void _logos_method$InCallService$PHAudioCallViewController$setCurrentStat
 static void _logos_method$InCallService$PHAudioCallViewController$viewDidLayoutSubviews(PHAudioCallViewController* self, SEL _cmd) {
     _logos_orig$InCallService$PHAudioCallViewController$viewDidLayoutSubviews(self, _cmd);
     
+    
+    
+    
     PHCallParticipantsView *participants = self.callParticipantsViewController.participantsView;
     UILabel *statusLabel = participants.singleCallLabelView.statusLabel;
     
@@ -363,6 +390,8 @@ static void _logos_method$InCallService$PHAudioCallViewController$viewDidLayoutS
 static id _logos_method$InCallService$InCallServiceApplication$init(InCallServiceApplication* self, SEL _cmd) {
     id orig = _logos_orig$InCallService$InCallServiceApplication$init(self, _cmd);
     
+    
+    
     sbCenter = [CPDistributedMessagingCenter centerNamed:@"com.matchstic.whodis.incall"];
     
     if ([[NSFileManager defaultManager] fileExistsAtPath:@"/usr/lib/librocketbootstrap.dylib"])
@@ -376,7 +405,6 @@ static id _logos_method$InCallService$InCallServiceApplication$init(InCallServic
 
 
 static NSDictionary * _logos_method$InCallService$InCallServiceApplication$_whodis_handleMessageNamed$withUserInfo$(InCallServiceApplication* self, SEL _cmd, NSString * name, NSDictionary * userinfo) {
-    
     if ([name isEqualToString:@"finishedDownload"]) {
         NSData *data = [userinfo objectForKey:@"data"];
         analyseResultingData(data);
@@ -404,6 +432,7 @@ static void _logos_method$SpringBoard$SpringBoard$applicationDidFinishLaunching$
     [sbCenter runServerOnCurrentThread];
     [sbCenter registerForMessageName:@"getThing" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     [sbCenter registerForMessageName:@"downloadFromURL" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
+    [sbCenter registerForMessageName:@"cancelDownload" target:self selector:@selector(_whodis_handleMessageNamed:withUserInfo:)];
     
     
     
@@ -411,8 +440,9 @@ static void _logos_method$SpringBoard$SpringBoard$applicationDidFinishLaunching$
 
 
 static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessageNamed$withUserInfo$(SpringBoard* self, SEL _cmd, NSString * name, NSDictionary * userinfo) {
-    
     if ([name isEqualToString:@"getThing"]) {
+        
+        
         LSApplicationProxy *proxy = [LSApplicationProxy applicationProxyForIdentifier:@"com.truesoftware.TrueCallerOther"];
         NSUUID *uuid = [proxy deviceIdentifierForVendor];
         NSString *myNumber = [uuid UUIDString];
@@ -427,16 +457,15 @@ static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessag
     
         return output;
     } else if ([name isEqualToString:@"downloadFromURL"]) {
-        NSLog(@"ABOUT TO DOWNLOAD IN SB");
-        
         NSString *url = [userinfo objectForKey:@"url"];
         
         if (!dataDownloader) {
             dataDownloader = [[WDDataDownloader alloc] init];
+        } else {
+            [dataDownloader cancelDownloadIfNecessary];
         }
         
         [dataDownloader downloadFromURL:url withCallback:^(NSData *data) {
-            NSLog(@"DOWNLOADED! %lu", (unsigned long)data.length);
             
             if (!data) {
                 data = [NSData new];
@@ -449,6 +478,9 @@ static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessag
         }];
         
         return nil;
+    } else if ([name isEqualToString:@"cancelDownload"]) {
+        [dataDownloader cancelDownloadIfNecessary];
+        return nil;
     } else {
         return nil;
     }
@@ -458,7 +490,7 @@ static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessag
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_25b1024c() {
+static __attribute__((constructor)) void _logosLocalCtor_9538a8e0() {
     {}
     
     
@@ -478,7 +510,6 @@ static __attribute__((constructor)) void _logosLocalCtor_25b1024c() {
         {Class _logos_class$InCallService$PHAudioCallViewController = objc_getClass("PHAudioCallViewController"); MSHookMessageEx(_logos_class$InCallService$PHAudioCallViewController, @selector(setCurrentState:animated:), (IMP)&_logos_method$InCallService$PHAudioCallViewController$setCurrentState$animated$, (IMP*)&_logos_orig$InCallService$PHAudioCallViewController$setCurrentState$animated$);MSHookMessageEx(_logos_class$InCallService$PHAudioCallViewController, @selector(viewDidLayoutSubviews), (IMP)&_logos_method$InCallService$PHAudioCallViewController$viewDidLayoutSubviews, (IMP*)&_logos_orig$InCallService$PHAudioCallViewController$viewDidLayoutSubviews);Class _logos_class$InCallService$InCallServiceApplication = objc_getClass("InCallServiceApplication"); MSHookMessageEx(_logos_class$InCallService$InCallServiceApplication, @selector(init), (IMP)&_logos_method$InCallService$InCallServiceApplication$init, (IMP*)&_logos_orig$InCallService$InCallServiceApplication$init);{ char _typeEncoding[1024]; unsigned int i = 0; memcpy(_typeEncoding + i, @encode(NSDictionary *), strlen(@encode(NSDictionary *))); i += strlen(@encode(NSDictionary *)); _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSString *), strlen(@encode(NSString *))); i += strlen(@encode(NSString *)); memcpy(_typeEncoding + i, @encode(NSDictionary *), strlen(@encode(NSDictionary *))); i += strlen(@encode(NSDictionary *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$InCallService$InCallServiceApplication, @selector(_whodis_handleMessageNamed:withUserInfo:), (IMP)&_logos_method$InCallService$InCallServiceApplication$_whodis_handleMessageNamed$withUserInfo$, _typeEncoding); }}
         
         inCallCenter = [CPDistributedMessagingCenter centerNamed:@"com.matchstic.whodis"];
-        
         
         if ([[NSFileManager defaultManager] fileExistsAtPath:@"/usr/lib/librocketbootstrap.dylib"])
             rocketbootstrap_distributedmessagingcenter_apply(inCallCenter);
