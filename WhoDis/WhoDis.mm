@@ -92,7 +92,7 @@ static NSString *inCallCurrentDownloadNumber;
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class SpringBoard; @class InCallServiceApplication; @class PHAudioCallViewController; 
+@class PHAudioCallViewController; @class InCallServiceApplication; @class SpringBoard; 
 
 
 #line 92 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
@@ -102,11 +102,13 @@ static void (*_logos_orig$InCallService$PHAudioCallViewController$setCurrentStat
 NSDictionary *constructParametersForNumber(NSString *number) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
+    number = [[number componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
     
-    number = [number stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
-    number = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
-    number = [number stringByReplacingOccurrencesOfString:@")" withString:@""];
+    
+    
+    
+    
+    
     number = [number stringByReplacingOccurrencesOfString:@"+" withString:@"00"];
     
     
@@ -505,7 +507,7 @@ static void WhoDisSettingsChanged(CFNotificationCenterRef center, void *observer
     [WDResources reloadSettings];
 }
 
-static __attribute__((constructor)) void _logosLocalCtor_b145a852() {
+static __attribute__((constructor)) void _logosLocalCtor_7a029742() {
     {}
     
     

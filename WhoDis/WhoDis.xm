@@ -95,11 +95,9 @@ static NSString *inCallCurrentDownloadNumber;
 NSDictionary *constructParametersForNumber(NSString *number) {
     NSMutableDictionary *dict = [NSMutableDictionary dictionary];
     
+    number = [[number componentsSeparatedByCharactersInSet:[[NSCharacterSet characterSetWithCharactersInString:@"+0123456789"] invertedSet]] componentsJoinedByString:@""];
+    
     // q is phone number coming in - need to strip it as needed.
-    number = [number stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    number = [number stringByReplacingOccurrencesOfString:@" " withString:@""];
-    number = [number stringByReplacingOccurrencesOfString:@"(" withString:@""];
-    number = [number stringByReplacingOccurrencesOfString:@")" withString:@""];
     number = [number stringByReplacingOccurrencesOfString:@"+" withString:@"00"];
     
     // myNumber - gotta get SB to pull this due to an entitlement.
