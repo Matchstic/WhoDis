@@ -1,9 +1,9 @@
 Package: com.matchstic.whodis
 Name: Who Dis?
-Version: 0.2
+Version: 0.3
 Description: Basic Caller ID and spam detection
 Section: System
-Depends: firmware (>= 9.0), mobilesubstrate, com.rpetrich.rocketbootstrap (>= 1.0.2)
+Depends: firmware (>= 8.1), mobilesubstrate, com.rpetrich.rocketbootstrap (>= 1.0.2)
 Priority: optional
 Architecture: iphoneos-arm
 Author: Matt Clarke <matt@incendo.ws>
