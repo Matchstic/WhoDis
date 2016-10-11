@@ -9,10 +9,25 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>WhoDisPrefs.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>C9338D981DA93BF900163D21</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C99C15D01DAD2C4500840454</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C99C15F81DAD2C5D00840454</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -84,12 +84,8 @@
         spamText = @"Potential spam";
     }
     
-    if ([nameText isEqualToString:@""] || !nameText) {
-        self.name.text = spamText;
-    } else {
-        self.name.text = nameText;
-        self.spamScore.text = spamText;
-    }
+    self.name.text = nameText;
+    self.spamScore.text = spamText;
     
     // And now, animate in.
     

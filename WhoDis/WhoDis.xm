@@ -2,6 +2,7 @@
 #import <objc/runtime.h>
 #import "WDCallerIDViewController.h"
 #import "WDDataDownloader.h"
+#import "WDResources.h"
 
 //////////////////////////////////////////////////////////////////////
 // Internal headers
@@ -139,8 +140,6 @@ NSDictionary *constructParametersForNumber(NSString *number) {
 
 // Create full URL string.
 NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
-    // https://search5.truecaller.com/v2/search?client_id=1&clientId=1&countryCode=gb&locAddr=&myNumber=d4619f1ec7ab4093b40fad78b5d170aa&pageId=&q=08436848488&registerId=357839475&type=4
-    
     NSMutableString *string = [@"https://search5.truecaller.com/v2/search?client_id=1&clientId=1" mutableCopy];
     
     for (NSString *key in [dict allKeys]) {
@@ -307,7 +306,7 @@ void analyseResultingData(NSData *dataIn) {
  */
 
 - (void)setCurrentState:(unsigned short)arg1 animated:(_Bool)arg2 {
-    if (arg1 != 0) {
+    if (arg1 != 0 && arg1 != 1) {
         // Hide the view since no longer incoming state.
         
         if (callerIDController.view.alpha != 0.0) {
@@ -316,8 +315,10 @@ void analyseResultingData(NSData *dataIn) {
             // Cancel the download if there's one still going, as we don't need it now.
             [inCallCenter sendMessageName:@"cancelDownload" userInfo:nil];
         }
-    } else if (arg1 == 0) {
+    } else if (arg1 == 0 || arg1 == 1) {
         // Show view if needed.
+        [WDResources reloadSettings];
+        BOOL shouldShow = (arg1 == 0 ? [WDResources displayOnIncomingCalls] : [WDResources displayOnOutgoingCalls]);
         
         // TODO: Should we also display for outgoing calls too? It's not like it's hard.
         
@@ -343,7 +344,7 @@ void analyseResultingData(NSData *dataIn) {
                 isPhoneNumber = YES;
             }
         
-            if (isPhoneNumber) {
+            if (isPhoneNumber && shouldShow) {
                 getTruecallerInformatonForNumber(numberOrName);
             
                 // Make caller ID view visible pls.
@@ -493,12 +494,20 @@ void analyseResultingData(NSData *dataIn) {
 
 %end
 
+static void WhoDisSettingsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+    [WDResources reloadSettings];
+}
+
 %ctor {
     %init;
     
     // XXX: We need to go multi-process so that we can leverage an entitlement from SB to talk to lsd.
     
     BOOL sb = [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.springboard"];
+    [WDResources reloadSettings];
+    
+    CFNotificationCenterRef r = CFNotificationCenterGetDarwinNotifyCenter();
+    CFNotificationCenterAddObserver(r, NULL, WhoDisSettingsChanged, CFSTR("com.matchstic.whodis/settingsChanged"), NULL, 0);
     
     if (sb) {
         %init(SpringBoard);

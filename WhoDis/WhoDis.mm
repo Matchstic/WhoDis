@@ -3,6 +3,7 @@
 #import <objc/runtime.h>
 #import "WDCallerIDViewController.h"
 #import "WDDataDownloader.h"
+#import "WDResources.h"
 
 
 
@@ -91,10 +92,10 @@ static NSString *inCallCurrentDownloadNumber;
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class SpringBoard; @class PHAudioCallViewController; @class InCallServiceApplication; 
+@class SpringBoard; @class InCallServiceApplication; @class PHAudioCallViewController; 
 
 
-#line 91 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
+#line 92 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
 static void (*_logos_orig$InCallService$PHAudioCallViewController$setCurrentState$animated$)(PHAudioCallViewController*, SEL, unsigned short, _Bool); static void _logos_method$InCallService$PHAudioCallViewController$setCurrentState$animated$(PHAudioCallViewController*, SEL, unsigned short, _Bool); static void (*_logos_orig$InCallService$PHAudioCallViewController$viewDidLayoutSubviews)(PHAudioCallViewController*, SEL); static void _logos_method$InCallService$PHAudioCallViewController$viewDidLayoutSubviews(PHAudioCallViewController*, SEL); static id (*_logos_orig$InCallService$InCallServiceApplication$init)(InCallServiceApplication*, SEL); static id _logos_method$InCallService$InCallServiceApplication$init(InCallServiceApplication*, SEL); static NSDictionary * _logos_method$InCallService$InCallServiceApplication$_whodis_handleMessageNamed$withUserInfo$(InCallServiceApplication*, SEL, NSString *, NSDictionary *); 
 
 
@@ -146,8 +147,6 @@ NSDictionary *constructParametersForNumber(NSString *number) {
 
 
 NSString *formatDictionaryIntoURLString(NSDictionary *dict) {
-    
-    
     NSMutableString *string = [@"https://search5.truecaller.com/v2/search?client_id=1&clientId=1" mutableCopy];
     
     for (NSString *key in [dict allKeys]) {
@@ -314,7 +313,7 @@ void analyseResultingData(NSData *dataIn) {
 
 
 static void _logos_method$InCallService$PHAudioCallViewController$setCurrentState$animated$(PHAudioCallViewController* self, SEL _cmd, unsigned short arg1, _Bool arg2) {
-    if (arg1 != 0) {
+    if (arg1 != 0 && arg1 != 1) {
         
         
         if (callerIDController.view.alpha != 0.0) {
@@ -323,8 +322,10 @@ static void _logos_method$InCallService$PHAudioCallViewController$setCurrentStat
             
             [inCallCenter sendMessageName:@"cancelDownload" userInfo:nil];
         }
-    } else if (arg1 == 0) {
+    } else if (arg1 == 0 || arg1 == 1) {
         
+        [WDResources reloadSettings];
+        BOOL shouldShow = (arg1 == 0 ? [WDResources displayOnIncomingCalls] : [WDResources displayOnOutgoingCalls]);
         
         
         
@@ -350,7 +351,7 @@ static void _logos_method$InCallService$PHAudioCallViewController$setCurrentStat
                 isPhoneNumber = YES;
             }
         
-            if (isPhoneNumber) {
+            if (isPhoneNumber && shouldShow) {
                 getTruecallerInformatonForNumber(numberOrName);
             
                 
@@ -500,12 +501,20 @@ static NSDictionary * _logos_method$SpringBoard$SpringBoard$_whodis_handleMessag
 
 
 
-static __attribute__((constructor)) void _logosLocalCtor_0a0ddd70() {
+static void WhoDisSettingsChanged(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo) {
+    [WDResources reloadSettings];
+}
+
+static __attribute__((constructor)) void _logosLocalCtor_b145a852() {
     {}
     
     
     
     BOOL sb = [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.springboard"];
+    [WDResources reloadSettings];
+    
+    CFNotificationCenterRef r = CFNotificationCenterGetDarwinNotifyCenter();
+    CFNotificationCenterAddObserver(r, NULL, WhoDisSettingsChanged, CFSTR("com.matchstic.whodis/settingsChanged"), NULL, 0);
     
     if (sb) {
         {Class _logos_class$SpringBoard$SpringBoard = objc_getClass("SpringBoard"); MSHookMessageEx(_logos_class$SpringBoard$SpringBoard, @selector(applicationDidFinishLaunching:), (IMP)&_logos_method$SpringBoard$SpringBoard$applicationDidFinishLaunching$, (IMP*)&_logos_orig$SpringBoard$SpringBoard$applicationDidFinishLaunching$);{ char _typeEncoding[1024]; unsigned int i = 0; memcpy(_typeEncoding + i, @encode(NSDictionary *), strlen(@encode(NSDictionary *))); i += strlen(@encode(NSDictionary *)); _typeEncoding[i] = '@'; i += 1; _typeEncoding[i] = ':'; i += 1; memcpy(_typeEncoding + i, @encode(NSString *), strlen(@encode(NSString *))); i += strlen(@encode(NSString *)); memcpy(_typeEncoding + i, @encode(NSDictionary *), strlen(@encode(NSDictionary *))); i += strlen(@encode(NSDictionary *)); _typeEncoding[i] = '\0'; class_addMethod(_logos_class$SpringBoard$SpringBoard, @selector(_whodis_handleMessageNamed:withUserInfo:), (IMP)&_logos_method$SpringBoard$SpringBoard$_whodis_handleMessageNamed$withUserInfo$, _typeEncoding); }}

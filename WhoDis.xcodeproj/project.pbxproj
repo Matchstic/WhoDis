@@ -20,6 +20,13 @@
 		C9338DC31DA99B7E00163D21 /* AppSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DC21DA99B7E00163D21 /* AppSupport.framework */; };
 		C93EA2F41DA99FFB009D8CD9 /* WDDataDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = C93EA2F21DA99FFB009D8CD9 /* WDDataDownloader.h */; };
 		C93EA2F51DA99FFB009D8CD9 /* WDDataDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = C93EA2F31DA99FFB009D8CD9 /* WDDataDownloader.m */; };
+		C99C15CA1DAD2AE100840454 /* WDResources.h in Headers */ = {isa = PBXBuildFile; fileRef = C99C15C81DAD2AE100840454 /* WDResources.h */; };
+		C99C15CB1DAD2AE100840454 /* WDResources.m in Sources */ = {isa = PBXBuildFile; fileRef = C99C15C91DAD2AE100840454 /* WDResources.m */; };
+		C99C15FA1DAD2C5D00840454 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338D9C1DA93BF900163D21 /* Foundation.framework */; };
+		C99C15FB1DAD2C5D00840454 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9338DBC1DA9889400163D21 /* UIKit.framework */; };
+		C99C15FC1DAD2C5D00840454 /* Preferences.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C99C15D41DAD2C4500840454 /* Preferences.framework */; };
+		C99C16061DAD2C5D00840454 /* WhoDisPrefsController.h in Headers */ = {isa = PBXBuildFile; fileRef = C99C16051DAD2C5D00840454 /* WhoDisPrefsController.h */; };
+		C99C16081DAD2C5D00840454 /* WhoDisPrefsController.m in Sources */ = {isa = PBXBuildFile; fileRef = C99C16071DAD2C5D00840454 /* WhoDisPrefsController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +50,22 @@
 		C9338DC21DA99B7E00163D21 /* AppSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppSupport.framework; path = System/Library/PrivateFrameworks/AppSupport.framework; sourceTree = SDKROOT; };
 		C93EA2F21DA99FFB009D8CD9 /* WDDataDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDDataDownloader.h; sourceTree = "<group>"; };
 		C93EA2F31DA99FFB009D8CD9 /* WDDataDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDDataDownloader.m; sourceTree = "<group>"; };
+		C99C15C81DAD2AE100840454 /* WDResources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WDResources.h; sourceTree = "<group>"; };
+		C99C15C91DAD2AE100840454 /* WDResources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WDResources.m; sourceTree = "<group>"; };
+		C99C15D41DAD2C4500840454 /* Preferences.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Preferences.framework; path = Library/Frameworks/Preferences.framework; sourceTree = DEVELOPER_DIR; };
+		C99C15F91DAD2C5D00840454 /* WhoDisPrefs.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WhoDisPrefs.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
+		C99C16001DAD2C5D00840454 /* control.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = control.txt; path = Package/DEBIAN/control.txt; sourceTree = "<group>"; };
+		C99C16011DAD2C5D00840454 /* control */ = {isa = PBXFileReference; lastKnownFileType = text; name = control; path = Package/DEBIAN/control; sourceTree = "<group>"; };
+		C99C16031DAD2C5D00840454 /* PackageVersion.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = PackageVersion.plist; sourceTree = "<group>"; };
+		C99C16041DAD2C5D00840454 /* WhoDisPrefs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WhoDisPrefs-Info.plist"; sourceTree = "<group>"; };
+		C99C16051DAD2C5D00840454 /* WhoDisPrefsController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WhoDisPrefsController.h; sourceTree = "<group>"; };
+		C99C16071DAD2C5D00840454 /* WhoDisPrefsController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WhoDisPrefsController.m; sourceTree = "<group>"; };
+		C99C160C1DAD2C5D00840454 /* WhoDisPrefs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WhoDisPrefs.plist; path = Package/Library/PreferenceLoader/Preferences/WhoDisPrefs.plist; sourceTree = "<group>"; };
+		C99C160F1DAD2C5D00840454 /* WhoDisPrefs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WhoDisPrefs.plist; path = Package/Library/PreferenceBundles/WhoDisPrefs.bundle/WhoDisPrefs.plist; sourceTree = "<group>"; };
+		C99C16101DAD2C5D00840454 /* WhoDisPrefsIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = WhoDisPrefsIcon.png; path = Package/Library/PreferenceBundles/WhoDisPrefs.bundle/WhoDisPrefsIcon.png; sourceTree = "<group>"; };
+		C99C16111DAD2C5D00840454 /* WhoDisPrefsIcon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "WhoDisPrefsIcon@2x.png"; path = "Package/Library/PreferenceBundles/WhoDisPrefs.bundle/WhoDisPrefsIcon@2x.png"; sourceTree = "<group>"; };
+		C99C16161DAD2C5D00840454 /* com.matchstic.WhoDisPrefs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = com.matchstic.WhoDisPrefs.plist; path = Package/var/mobile/Library/Preferences/com.matchstic.WhoDisPrefs.plist; sourceTree = "<group>"; };
+		C99C16171DAD2C5D00840454 /* WhoDisPrefs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WhoDisPrefs-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +84,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C99C15F51DAD2C5D00840454 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C99C15FA1DAD2C5D00840454 /* Foundation.framework in Frameworks */,
+				C99C15FC1DAD2C5D00840454 /* Preferences.framework in Frameworks */,
+				C99C15FB1DAD2C5D00840454 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -68,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				C9338D9E1DA93BF900163D21 /* WhoDis */,
+				C99C15FD1DAD2C5D00840454 /* WhoDisPrefs */,
 				C9338D9B1DA93BF900163D21 /* Frameworks */,
 				C9338D9A1DA93BF900163D21 /* Products */,
 			);
@@ -77,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				C9338D991DA93BF900163D21 /* WhoDis.dylib */,
+				C99C15F91DAD2C5D00840454 /* WhoDisPrefs.bundle */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -92,6 +127,7 @@
 				C9338DB41DA94F7F00163D21 /* CoreTelephony.framework */,
 				C9338DB21DA93C5F00163D21 /* libsubstrate.dylib */,
 				C9338D9C1DA93BF900163D21 /* Foundation.framework */,
+				C99C15D41DAD2C4500840454 /* Preferences.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -103,6 +139,8 @@
 				C9338DB91DA9826C00163D21 /* WDCallerIDViewController.m */,
 				C93EA2F21DA99FFB009D8CD9 /* WDDataDownloader.h */,
 				C93EA2F31DA99FFB009D8CD9 /* WDDataDownloader.m */,
+				C99C15C81DAD2AE100840454 /* WDResources.h */,
+				C99C15C91DAD2AE100840454 /* WDResources.m */,
 				C9338DA61DA93BF900163D21 /* WhoDis.xm */,
 				C9338DA71DA93BF900163D21 /* WhoDis.mm */,
 				C9338D9F1DA93BF900163D21 /* Package */,
@@ -162,6 +200,121 @@
 			name = DynamicLibraries;
 			sourceTree = "<group>";
 		};
+		C99C15FD1DAD2C5D00840454 /* WhoDisPrefs */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16051DAD2C5D00840454 /* WhoDisPrefsController.h */,
+				C99C16071DAD2C5D00840454 /* WhoDisPrefsController.m */,
+				C99C15FE1DAD2C5D00840454 /* Package */,
+				C99C16021DAD2C5D00840454 /* Supporting Files */,
+			);
+			path = WhoDisPrefs;
+			sourceTree = "<group>";
+		};
+		C99C15FE1DAD2C5D00840454 /* Package */ = {
+			isa = PBXGroup;
+			children = (
+				C99C15FF1DAD2C5D00840454 /* DEBIAN */,
+				C99C16091DAD2C5D00840454 /* Library */,
+				C99C16121DAD2C5D00840454 /* var */,
+			);
+			name = Package;
+			sourceTree = "<group>";
+		};
+		C99C15FF1DAD2C5D00840454 /* DEBIAN */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16001DAD2C5D00840454 /* control.txt */,
+				C99C16011DAD2C5D00840454 /* control */,
+			);
+			name = DEBIAN;
+			sourceTree = "<group>";
+		};
+		C99C16021DAD2C5D00840454 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16031DAD2C5D00840454 /* PackageVersion.plist */,
+				C99C16041DAD2C5D00840454 /* WhoDisPrefs-Info.plist */,
+				C99C16171DAD2C5D00840454 /* WhoDisPrefs-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C99C16091DAD2C5D00840454 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				C99C160A1DAD2C5D00840454 /* PreferenceLoader */,
+				C99C160D1DAD2C5D00840454 /* PreferenceBundles */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		C99C160A1DAD2C5D00840454 /* PreferenceLoader */ = {
+			isa = PBXGroup;
+			children = (
+				C99C160B1DAD2C5D00840454 /* Preferences */,
+			);
+			name = PreferenceLoader;
+			sourceTree = "<group>";
+		};
+		C99C160B1DAD2C5D00840454 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C99C160C1DAD2C5D00840454 /* WhoDisPrefs.plist */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
+		C99C160D1DAD2C5D00840454 /* PreferenceBundles */ = {
+			isa = PBXGroup;
+			children = (
+				C99C160E1DAD2C5D00840454 /* ___PACKAGENAME___.bundle */,
+			);
+			name = PreferenceBundles;
+			sourceTree = "<group>";
+		};
+		C99C160E1DAD2C5D00840454 /* ___PACKAGENAME___.bundle */ = {
+			isa = PBXGroup;
+			children = (
+				C99C160F1DAD2C5D00840454 /* WhoDisPrefs.plist */,
+				C99C16101DAD2C5D00840454 /* WhoDisPrefsIcon.png */,
+				C99C16111DAD2C5D00840454 /* WhoDisPrefsIcon@2x.png */,
+			);
+			name = "___PACKAGENAME___.bundle";
+			sourceTree = "<group>";
+		};
+		C99C16121DAD2C5D00840454 /* var */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16131DAD2C5D00840454 /* mobile */,
+			);
+			name = var;
+			sourceTree = "<group>";
+		};
+		C99C16131DAD2C5D00840454 /* mobile */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16141DAD2C5D00840454 /* Library */,
+			);
+			name = mobile;
+			sourceTree = "<group>";
+		};
+		C99C16141DAD2C5D00840454 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16151DAD2C5D00840454 /* Preferences */,
+			);
+			name = Library;
+			sourceTree = "<group>";
+		};
+		C99C16151DAD2C5D00840454 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				C99C16161DAD2C5D00840454 /* com.matchstic.WhoDisPrefs.plist */,
+			);
+			name = Preferences;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -170,7 +323,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C93EA2F41DA99FFB009D8CD9 /* WDDataDownloader.h in Headers */,
+				C99C15CA1DAD2AE100840454 /* WDResources.h in Headers */,
 				C9338DBA1DA9826C00163D21 /* WDCallerIDViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C99C15F61DAD2C5D00840454 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C99C16061DAD2C5D00840454 /* WhoDisPrefsController.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +358,24 @@
 			productReference = C9338D991DA93BF900163D21 /* WhoDis.dylib */;
 			productType = "com.apple.product-type.library.dynamic";
 		};
+		C99C15F81DAD2C5D00840454 /* WhoDisPrefs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C99C16181DAD2C5D00840454 /* Build configuration list for PBXNativeTarget "WhoDisPrefs" */;
+			buildPhases = (
+				C99C15F41DAD2C5D00840454 /* Sources */,
+				C99C15F51DAD2C5D00840454 /* Frameworks */,
+				C99C15F61DAD2C5D00840454 /* Headers */,
+				C99C15F71DAD2C5D00840454 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WhoDisPrefs;
+			productName = WhoDisPrefs;
+			productReference = C99C15F91DAD2C5D00840454 /* WhoDisPrefs.bundle */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -205,6 +385,9 @@
 				LastUpgradeCheck = 0640;
 				TargetAttributes = {
 					C9338D981DA93BF900163D21 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					C99C15F81DAD2C5D00840454 = {
 						CreatedOnToolsVersion = 6.4;
 					};
 				};
@@ -222,6 +405,7 @@
 			projectRoot = "";
 			targets = (
 				C9338D981DA93BF900163D21 /* WhoDis */,
+				C99C15F81DAD2C5D00840454 /* WhoDisPrefs */,
 			);
 		};
 /* End PBXProject section */
@@ -253,6 +437,19 @@
 			shellPath = /bin/sh;
 			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
 		};
+		C99C15F71DAD2C5D00840454 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/opt/iOSOpenDev/bin/iosod --xcbp";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -262,7 +459,16 @@
 			files = (
 				C9338DA81DA93BF900163D21 /* WhoDis.mm in Sources */,
 				C93EA2F51DA99FFB009D8CD9 /* WDDataDownloader.m in Sources */,
+				C99C15CB1DAD2AE100840454 /* WDResources.m in Sources */,
 				C9338DBB1DA9826C00163D21 /* WDCallerIDViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C99C15F41DAD2C5D00840454 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C99C16081DAD2C5D00840454 /* WhoDisPrefsController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,6 +588,70 @@
 			};
 			name = Release;
 		};
+		C99C16191DAD2C5D00840454 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WhoDisPrefs/WhoDisPrefs-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				INFOPLIST_FILE = "WhoDisPrefs/WhoDisPrefs-Info.plist";
+				INSTALL_PATH = /Library/PreferenceBundles;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Debug;
+		};
+		C99C161A1DAD2C5D00840454 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "";
+				EXCLUDED_RECURSIVE_SEARCH_PATH_SUBDIRECTORIES = "*.nib *.lproj *.gch (*) .DS_Store CVS .svn .git .hg *.xcodeproj *.xcode *.pbproj *.pbxproj";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(iOSOpenDevPath)/frameworks/**",
+					"$(SDKROOT)/System/Library/PrivateFrameworks",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WhoDisPrefs/WhoDisPrefs-Prefix.pch";
+				HEADER_SEARCH_PATHS = "$(iOSOpenDevPath)/include/**";
+				INFOPLIST_FILE = "WhoDisPrefs/WhoDisPrefs-Info.plist";
+				INSTALL_PATH = /Library/PreferenceBundles;
+				LIBRARY_SEARCH_PATHS = "$(iOSOpenDevPath)/lib/**";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = bundle;
+				iOSOpenDevBuildPackageOnAnyBuild = NO;
+				iOSOpenDevCopyOnBuild = NO;
+				iOSOpenDevDevice = "";
+				iOSOpenDevInstallOnAnyBuild = NO;
+				iOSOpenDevInstallOnProfiling = YES;
+				iOSOpenDevPath = /opt/iOSOpenDev;
+				iOSOpenDevRespringOnInstall = YES;
+				iOSOpenDevUsePackageVersionPList = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -402,6 +672,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		C99C16181DAD2C5D00840454 /* Build configuration list for PBXNativeTarget "WhoDisPrefs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C99C16191DAD2C5D00840454 /* Debug */,
+				C99C161A1DAD2C5D00840454 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
