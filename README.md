@@ -12,6 +12,8 @@ To use this, the Truecaller app *must* be installed and setup on the device.
 
 iOSOpenDev is used to develop this tweak, though should be easy enough to port to theos' makefile system.
 
+Also, Automatic Reference Counting is used throughout this tweak, and the settings panel code.
+
 The following libraries are linked into this tweak:
 - libSustrate
 - CoreTelephony
