@@ -3,7 +3,9 @@ This tweak provides caller ID and checks to unknown numbers using the Truecaller
 
 To use this, the Truecaller app *must* be installed and setup on the device.
 
-Screenshot: ![Tweak in action](/Images/screenshot1.jpg?raw=true)
+## Screenshot
+
+![Tweak in action](/Images/screenshot1.jpg?raw=true)
 
 ## Dependancies
 
