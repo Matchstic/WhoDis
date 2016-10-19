@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>title</key>
+	<string>Who Dis?</string>
+	<key>items</key>
+	<array>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>label</key>
+			<string>Display For:</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>displayOnIncomingCalls</string>
+			<key>label</key>
+			<string>Incoming Calls</string>
+			<key>PostNotification</key>
+			<string>com.matchstic.whodis/settingsChanged</string>
+			<key>defaults</key>
+			<string>com.matchstic.whodis</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSSwitchCell</string>
+			<key>default</key>
+			<true/>
+			<key>key</key>
+			<string>displayOnOutgoingCalls</string>
+			<key>label</key>
+			<string>Outgoing Calls</string>
+			<key>PostNotification</key>
+			<string>com.matchstic.whodis/settingsChanged</string>
+			<key>defaults</key>
+			<string>com.matchstic.whodis</string>
+		</dict>
+		<dict>
+			<key>cell</key>
+			<string>PSGroupCell</string>
+			<key>footerText</key>
+			<string>Who Dis? © 2016 Matt Clarke (Matchstic)</string>
+		</dict>
+		<dict>
+			<key>action</key>
+			<string>githubLaunch:</string>
+			<key>cell</key>
+			<string>PSButtonCell</string>
+			<key>label</key>
+			<string>View on GitHub</string>
+		</dict>
+	</array>
+</dict>
+</plist>

@@ -92,7 +92,7 @@ static NSString *inCallCurrentDownloadNumber;
 
 #include <logos/logos.h>
 #include <substrate.h>
-@class PHAudioCallViewController; @class SpringBoard; @class InCallServiceApplication; 
+@class PHAudioCallViewController; @class InCallServiceApplication; @class SpringBoard; 
 
 
 #line 92 "/Users/Matt/iOS/Projects/WhoDis/WhoDis/WhoDis.xm"
